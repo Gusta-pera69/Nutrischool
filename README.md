@@ -1,36 +1,42 @@
-- **Dev-Mobile:Gustavo pereira Silva**
+- **Gustavo pereira:Dev.mobie**
 
 ## Tecnologias utilizadas
+
 - **React Native:** desenvolvimento do aplicativo mobile.
 - **Expo SDK 56:** ambiente e ferramentas de desenvolvimento.
 - **Expo Go:** execução e visualização do projeto em dispositivo móvel.
-- **Expo SQLite:** banco de dados local.
+- **Expo SQLite:** integração com o banco de dados local SQLite.
 - **JavaScript:** linguagem de programação.
 - **Node.js:** ambiente necessário para executar as ferramentas de desenvolvimento.
 
 ## Como executar o projeto
 
 ### Pré-requisitos
-- Node.js (versão LTS).
+
+- Node.js instalado (versão LTS).
 - Expo Go instalado no celular.
 - Git instalado no computador.
 
 ### 1. Clonar o repositório
+
 ```bash
 git clone https://github.com/Gusta-pera69/Nutrischool.git
 ```
 
 ### 2. Entrar na pasta do projeto
+
 ```bash
 cd Nutrischool
 ```
 
 ### 3. Instalar as dependências
+
 ```bash
 npm install
 ```
 
 ### 4. Iniciar o aplicativo
+
 ```bash
 npx expo start
 ```
@@ -42,42 +48,28 @@ npx expo start
 - Aguarde o aplicativo carregar.
 
 **Observações:**
+
 - O computador e o celular devem estar conectados à mesma rede Wi-Fi.
 - Caso a rede apresente problemas de conexão, execute `npx expo start --tunnel`.
 - O projeto utiliza Expo SDK 56. Confira a compatibilidade do Expo Go antes de executar.
 
-
-
-## Minha contribuição
-- Preparação do ambiente de desenvolvimento mobile.
-- Utilização do React Native e Expo.
-- Instalação e preparação da biblioteca `expo-sqlite` para integração com o banco de dados local. para integração com o SQLite
-
-### Evidências
-
-| Item | Evidência |
-|---|---|
-| Repositório no GitHub | [Nutrischool](https://github.com/Gusta-pera69/Nutrischool) |
-| Projeto Expo SDK 56 | Print do projeto executando no Expo Go ![Projeto executando](docs/expo.jpeg)|
-| Biblioteca `expo-sqlite` | Registro no `package.json` |
-| Primeiro commit | Histórico de commits do GitHub |
-
-- **Dev-Dados:Gustavo pereira Silva**
 ## Banco de dados
 
-O banco de dados do NutriSchool utiliza um modelo relacional composto por 8 tabelas, responsáveis por organizar as informações dos usuários, alunos, funcionários, merenda, produtos e pedidos.
+O banco de dados do NutriSchool utiliza SQLite e um modelo relacional composto por 8 tabelas, responsáveis por organizar as informações dos usuários, alunos, funcionários, merenda, produtos e pedidos.
 
 ### Diagrama Entidade-Relacionamento (DER)
 
-![DEER](docs/DER.png)
+![Diagrama Entidade-Relacionamento](docs/DER.png)
 
 ### Script SQL
 
-O arquivo [`script-banco.sql`](docs/scripit-banco.sql) contém a estrutura e as instruções SQL do banco de dados.
+O arquivo [`script-banco.sql`](docs/script-banco.sql) contém o script de criação das tabelas, definição dos relacionamentos, restrições de integridade e inserção de dados fictícios para testes.
 
 O script utiliza `PRAGMA foreign_keys = ON` para habilitar a verificação das chaves estrangeiras no SQLite.
 
-Teste o script completo no [SQLite Online](https://sqliteonline.com).
+Para visualizar e executar o script em um ambiente de testes, acesse o [SQLite Online](https://sqliteonline.com).
+
+- **Gustavo pereira:Dev.Dados**
 
 ### Estrutura do banco
 
@@ -94,18 +86,18 @@ Teste o script completo no [SQLite Online](https://sqliteonline.com).
 
 ### Integridade e regras de exclusão
 
-O banco utiliza chaves primárias (`PRIMARY KEY`) e estrangeiras (`FOREIGN KEY`) para identificar os registros e manter os relacionamentos entre as tabelas.
+O banco utiliza chaves primárias (`PRIMARY KEY`) e chaves estrangeiras (`FOREIGN KEY`) para identificar os registros e manter os relacionamentos entre as tabelas.
 
-As regras de exclusão foram definidas para preservar o histórico e evitar a perda de informações importantes:
+As regras de exclusão foram definidas para preservar o histórico e evitar a perda indevida de informações:
 
-- **RESTRICT:** impede a exclusão de registros que possuem vínculos com outros dados, preservando o histórico de compras, confirmações de merenda e registros relacionados aos alunos, funcionários e produtos.
-- **CASCADE:** permite que os itens de um pedido sejam excluídos automaticamente quando o próprio pedido for excluído.
+- **RESTRICT:** impede a exclusão de registros que possuem vínculos com outros dados, preservando a integridade dos relacionamentos.
+- **CASCADE:** permite excluir automaticamente os itens relacionados quando um registro de pedido é efetivamente excluído. O cancelamento de um pedido não exclui seus itens, pois eles são mantidos para preservar o histórico.
 
 ### Inativação de contas
 
-A tabela `Usuario` possui os campos `status` e `data_inativacao`, permitindo registrar a situação da conta e a data em que ela foi inativada.
+A tabela `Usuario` possui os campos `status_da_conta` e `data_inativacao`, permitindo registrar a situação da conta e a data em que ela foi inativada.
 
-A proposta é preservar os registros históricos durante um período de inatividade. Após o prazo definido, o aplicativo poderá executar uma rotina administrativa para anonimizar ou excluir os dados pessoais elegíveis, mantendo as informações necessárias para consultas e prestação de contas.
+A inativação preserva os registros no banco de dados. A anonimização ou exclusão de dados pessoais elegíveis após o prazo definido dependerá de uma rotina administrativa implementada no aplicativo.
 
 ### Operações e consultas (CRUD)
 
@@ -118,10 +110,45 @@ O planejamento das operações do banco contempla:
 - Consultas com `JOIN` para relacionar informações de diferentes tabelas.
 - Agrupamentos e contagens utilizando `GROUP BY`.
 
-## Minha contribuição
+## Contribuição individual
+
+### Dev Mobile — Gustavo Pereira Silva
+
+**Minha contribuição:**
+
+- Preparação do ambiente de desenvolvimento mobile.
+- Configuração do projeto utilizando React Native e Expo SDK 56.
+- Instalação e preparação da biblioteca `expo-sqlite` para integração com o banco de dados local.
+- Execução e visualização do aplicativo pelo Expo Go.
+- Criação do repositório no GitHub e envio inicial dos arquivos do projeto.
+
+**Evidências:**
+
+| Item | Evidência |
+|---|---|
+| Repositório no GitHub | [Nutrischool](https://github.com/Gusta-pera69/Nutrischool) |
+| Projeto Expo SDK 56 | Projeto executando no Expo Go (`docs/expo.jpeg`). |
+| Biblioteca `expo-sqlite` | Registro no `package.json`. |
+| Primeiro commit | Histórico de commits do GitHub. |
+
+### Dev de Dados — Gustavo Pereira Silva
+
+**Banco de dados:**
+
+**Minha contribuição:**
+
 - Elaboração do Diagrama Entidade-Relacionamento (DER).
 - Desenvolvimento do dicionário de dados.
 - Criação e validação do script SQL.
 - Definição das tabelas, atributos e relacionamentos.
 - Definição das regras de integridade referencial (`RESTRICT` e `CASCADE`).
+- Inserção de dados fictícios para testes.
 - Planejamento das operações CRUD e consultas do banco.
+- Execução de testes no SQLite para verificar o funcionamento do script e a integridade dos dados.
+
+**Evidências:**
+
+- Diagrama Entidade-Relacionamento: [`docs/DER.png`](docs/DER.png).
+- Script SQL: [`docs/script-banco.sql`](docs/script-banco.sql).
+
+---
